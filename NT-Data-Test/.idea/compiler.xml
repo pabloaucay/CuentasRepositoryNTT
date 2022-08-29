@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="service-movimientos" />
+        <module name="config-service" />
+        <module name="service-cuentas" />
+        <module name="service-clientes" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="config-service" target="11" />
+      <module name="service-clientes" target="11" />
+      <module name="service-cuentas" target="11" />
+      <module name="service-movimientos" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="config-service" options="-parameters" />
+      <module name="service-clientes" options="-parameters" />
+      <module name="service-cuentas" options="-parameters" />
+      <module name="service-movimientos" options="-parameters" />
+    </option>
+  </component>
+</project>

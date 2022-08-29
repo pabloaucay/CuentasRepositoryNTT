@@ -1,0 +1,39 @@
+#Application Configuration
+server:
+    port: 8091
+    error:
+        include-message: always
+
+
+spring:
+    # ===============================
+    # DB
+    # ===============================
+    datasource:
+        url: jdbc:mysql://localhost:6603/clientesDB
+        driverClassName: com.mysql.cj.jdbc.Driver
+        username: root
+        password: root
+
+    # ===============================
+    # JPA / HIBERNATE
+    # ===============================
+    jpa:
+        defer-datasource-initialization: true
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+            database-platform: org.hibernate.dialect.MySQL57InnoDBDialect
+        properties:
+            hibernate:
+                show_sql: true
+                use_sql_comments: false
+                format_sql: false
+logging:
+    pattern:
+        console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: http://localhost:8099/eureka/

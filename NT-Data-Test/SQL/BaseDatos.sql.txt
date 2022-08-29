@@ -1,0 +1,88 @@
+CREATE SCHEMA `clientesDB` ;
+CREATE TABLE `clientesDB`.`tbl_personas` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `identificacion` VARCHAR(13) NOT NULL,
+  `nombre` VARCHAR(100) NOT NULL,
+  `genero` VARCHAR(20) NULL,
+  `edad` INT NOT NULL,
+  `direccion` VARCHAR(300) NULL,
+  `telefono` VARCHAR(10) NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `identificacion_UNIQUE` (`identificacion` ASC) VISIBLE);
+
+CREATE TABLE `clientesDB`.`tbl_clientes` (
+  `id` INT NOT NULL,
+  `clienteid` VARCHAR(45) NOT NULL,
+  `contrasenia` VARCHAR(150) NOT NULL,
+  `estado` INT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `clienteid_UNIQUE` (`clienteid` ASC) VISIBLE,
+  CONSTRAINT `fk_cliente_persona`
+    FOREIGN KEY (`id`)
+    REFERENCES `clientesDB`.`tbl_personas` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+CREATE SCHEMA `cuentasDB` ;
+
+CREATE TABLE `cuentasDB`.`tbl_tipos_cuenta` (
+  `id` INT NOT NULL,
+  `descripcion` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`));
+
+insert into `cuentasDB`.`tbl_tipos_cuenta` (id,descripcion)
+values (1,'Ahorro');
+    insert into `cuentasDB`.`tbl_tipos_cuenta` (id,descripcion)
+values (2,'Corriente');
+
+CREATE TABLE `cuentasDB`.`tbl_cuentas` (
+  `numero_cuenta` VARCHAR(10) NOT NULL,
+  `id_cliente` INT NOT NULL,
+  `tipo_cuenta_id` INT NOT NULL,
+  `saldo_inicial` DECIMAL NOT NULL,
+  `estado` TINYINT(1) NOT NULL,
+  PRIMARY KEY (`numero_cuenta`),
+  INDEX `fk_cuenta_tipo_cuneta_idx` (`tipo_cuenta_id` ASC) VISIBLE,
+  CONSTRAINT `fk_cuenta_tipo_cuneta`
+    FOREIGN KEY (`tipo_cuenta_id`)
+    REFERENCES `cuentasDB`.`tbl_tipos_cuenta` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+CREATE SCHEMA `movimientosDB` ;
+
+CREATE TABLE `movimientosDB`.`tbl_tipos_movimiento` (
+  `id` int NOT NULL,
+  `descripcion` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+
+insert into `movimientosDB`.`tbl_tipos_movimiento`(id,descripcion)
+values (1,'Credito');
+    insert into `movimientosDB`.`tbl_tipos_movimiento`(id,descripcion)
+values (2,'Debito');
+
+CREATE TABLE `movimientosDB`.`tbl_movimientos` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `fecha` datetime(6) DEFAULT NULL,
+  `numero_cuenta` varchar(255) DEFAULT NULL,
+  `saldo` bigint DEFAULT NULL,
+  `valor` bigint DEFAULT NULL,
+  `tipo_movimiento_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKhwdxurblyf3tw23843me6dk96` (`tipo_movimiento_id`),
+  CONSTRAINT `FKhwdxurblyf3tw23843me6dk96` FOREIGN KEY (`tipo_movimiento_id`) REFERENCES `tbl_tipos_movimiento` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+
+
+
+
+
+
+
+
+

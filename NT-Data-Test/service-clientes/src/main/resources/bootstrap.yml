@@ -1,0 +1,10 @@
+spring:
+    application:
+      name: service-clientes
+    cloud:
+      config:
+        import-check:
+          enabled: false
+        uri: http://localhost:8081
+        username: admin
+        password: admin

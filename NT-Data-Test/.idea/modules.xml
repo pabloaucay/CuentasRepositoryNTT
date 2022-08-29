@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/NT-Data-Test.iml" filepath="$PROJECT_DIR$/.idea/NT-Data-Test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/config-service/config-service.iml" filepath="$PROJECT_DIR$/config-service/config-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-clientes/service-clientes.iml" filepath="$PROJECT_DIR$/service-clientes/service-clientes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-cuentas/service-cuentas.iml" filepath="$PROJECT_DIR$/service-cuentas/service-cuentas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-movimientos/service-movimientos.iml" filepath="$PROJECT_DIR$/service-movimientos/service-movimientos.iml" />
+    </modules>
+  </component>
+</project>
