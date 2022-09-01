@@ -87,13 +87,13 @@ public class MovimientoServiceImplement implements MovimientoService{
         movimiento.setFecha(new Date());
         Movimiento lastMovimientoDB= getlastMovimientoByNumeroCuenta(movimiento.getNumeroCuenta());
         Long saldoNuevo=0L;
+        if(movimiento.getValor()>0){
+            movimiento.setTipoMovimiento(TipoMovimiento.builder().id(1).build());
+        }else {
+            movimiento.setTipoMovimiento(TipoMovimiento.builder().id(2).build());
+        }
         if(lastMovimientoDB!=null){
             saldoNuevo=lastMovimientoDB.getSaldo()+ movimiento.getValor();
-            if(movimiento.getValor()>0){
-                movimiento.setTipoMovimiento(TipoMovimiento.builder().id(1).build());
-            }else {
-                movimiento.setTipoMovimiento(TipoMovimiento.builder().id(2).build());
-            }
             if(saldoNuevo<0){
                 throw new SaldoInsuficienteException();
             }
