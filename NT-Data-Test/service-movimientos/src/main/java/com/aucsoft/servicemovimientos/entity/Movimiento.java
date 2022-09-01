@@ -22,13 +22,13 @@ public class Movimiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull(message = "No puede ser vacio")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_movimiento_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private TipoMovimiento tipoMovimiento;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
+    @NotNull(message = "No puede ser vacio")
     @Column(name = "numero_cuenta")
     private String numeroCuenta;
     private Long valor;

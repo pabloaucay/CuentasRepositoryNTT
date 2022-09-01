@@ -3,6 +3,7 @@ package com.aucsoft.servicemovimientos.controller;
 import com.aucsoft.servicemovimientos.client.CuentaClient;
 import com.aucsoft.servicemovimientos.entity.Movimiento;
 import com.aucsoft.servicemovimientos.exception.SaldoInsuficienteException;
+import com.aucsoft.servicemovimientos.exception.ValorRequeridoException;
 import com.aucsoft.servicemovimientos.service.MovimientoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,8 @@ public class MovimientoController {
             movimientoCreate= movimientoService.createMovimiento(movimiento);
         }catch (SaldoInsuficienteException exception){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"El debito debe ser menor o igual al saldo disponible");
+        }catch (ValorRequeridoException exception){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Debe ingrear el valor del movimiento");
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(movimientoCreate);

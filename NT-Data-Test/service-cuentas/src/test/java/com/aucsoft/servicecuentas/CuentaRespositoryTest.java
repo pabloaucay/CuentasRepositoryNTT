@@ -6,12 +6,15 @@ import com.aucsoft.servicecuentas.repository.CuentaRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.List;
+
+@DataJpaTest
 public class CuentaRespositoryTest {
     @Autowired
     private CuentaRepository cuentaRepository;
 
-    @Test
     public void whenFindCuentaByNumeroCuenta_thenReturnCuenta(){
         Cuenta cuenta= Cuenta.builder()
             .estado(true)
@@ -21,8 +24,8 @@ public class CuentaRespositoryTest {
             .tipoCuenta(TipoCuenta.builder().id(1).build())
             .build();
         cuentaRepository.save(cuenta);
-        Cuenta founds= cuentaRepository.findBynumeroCuenta(cuenta.getNumeroCuenta());
-        Assertions.assertEquals(founds.getIdCliente(),cuenta.getIdCliente());
+        List<Cuenta> founds= cuentaRepository.findByidCliente(1L);
+        Assertions.assertEquals(founds.size(),1 );
 
     }
 }

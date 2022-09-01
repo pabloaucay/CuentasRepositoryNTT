@@ -3,7 +3,9 @@ package com.aucsoft.servicemovimientos.service;
 import com.aucsoft.servicemovimientos.Model.Cuenta;
 import com.aucsoft.servicemovimientos.client.CuentaClient;
 import com.aucsoft.servicemovimientos.entity.Movimiento;
+import com.aucsoft.servicemovimientos.entity.TipoMovimiento;
 import com.aucsoft.servicemovimientos.exception.SaldoInsuficienteException;
+import com.aucsoft.servicemovimientos.exception.ValorRequeridoException;
 import com.aucsoft.servicemovimientos.repository.MovimientoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,12 +80,20 @@ public class MovimientoServiceImplement implements MovimientoService{
     }
 
     @Override
-    public Movimiento createMovimiento(Movimiento movimiento) throws SaldoInsuficienteException {
+    public Movimiento createMovimiento(Movimiento movimiento) throws SaldoInsuficienteException, ValorRequeridoException {
+        if(movimiento.getValor()==0L){
+            throw new ValorRequeridoException();
+        }
         movimiento.setFecha(new Date());
         Movimiento lastMovimientoDB= getlastMovimientoByNumeroCuenta(movimiento.getNumeroCuenta());
         Long saldoNuevo=0L;
         if(lastMovimientoDB!=null){
             saldoNuevo=lastMovimientoDB.getSaldo()+ movimiento.getValor();
+            if(movimiento.getValor()>0){
+                movimiento.setTipoMovimiento(TipoMovimiento.builder().id(1).build());
+            }else {
+                movimiento.setTipoMovimiento(TipoMovimiento.builder().id(2).build());
+            }
             if(saldoNuevo<0){
                 throw new SaldoInsuficienteException();
             }
